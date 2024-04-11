@@ -1,0 +1,36 @@
+<dx-data-grid  
+id="gridContainer"
+[dataSource]="list_data"
+keyExpr="taskHistoryId"
+[height]="'100%'"
+                >
+                <dxo-paging [pageSize]="10"></dxo-paging>
+                <dxo-pager
+                  [showPageSizeSelector]="true"
+                  [allowedPageSizes]="[10, 25, 50, 100]"
+                ></dxo-pager>
+                <dxo-header-filter [visible]="true"></dxo-header-filter>
+                <dxo-filter-row
+                [visible]="true"
+                
+              ></dxo-filter-row>
+
+                <dxi-column dataField="employee.userInfo" caption="Employee Info"></dxi-column>
+                <dxi-column dataField="task.name" caption="Task Info"></dxi-column>
+                <dxi-column dataField="task.difficulty" cellTemplate="cellTemplate"  alignment="center" [width]="125" caption="Difficulty" ></dxi-column>
+                <dxi-column dataField="taskDate" caption="Task Date"  dataType="date" format="dd.MM.yyyy HH:mm"></dxi-column>
+
+  
+
+    <div *dxTemplate="let cell of 'cellTemplate'">
+        <span class="label label-warning" [style.backgroundColor]="cell.data.task.difficultyColorCode" style="color: white; border-radius: 50%; padding: 5px;">{{ cell.data.task.difficulty }}</span>
+    </div>
+
+</dx-data-grid>
+
+
+<div class="row mt-4">
+     <div class="d-flex justify-content-center">
+             <button type="button" class="btn btn-primary" (click)="Assign()">Manual Assign</button>
+     </div>
+</div>
